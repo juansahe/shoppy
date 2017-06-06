@@ -16,7 +16,7 @@ router.register(r'users', UserViewSet)
 
 urlpatterns = [
     # Admin
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
     # url(r'^admin_export/', include("vendor.admin_export.urls", namespace="admin_export")),
 
     # Main
