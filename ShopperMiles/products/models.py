@@ -2,13 +2,9 @@
 from __future__ import unicode_literals, absolute_import
 
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-from django.utils.encoding import python_2_unicode_compatible
-#from versatileimagefield.fields import VersatileImageField
-from datetime import datetime
 
-@python_2_unicode_compatible
-class User(AbstractUser):
+
+class Product(models.Model):
     # additional fields here
     xperience = models.CharField(max_length=100,null=True)
     shopper_points = models.CharField(max_length=100,null=True)
@@ -17,4 +13,3 @@ class User(AbstractUser):
         return self.username
 
 
-# for time spamped models
