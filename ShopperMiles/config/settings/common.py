@@ -61,6 +61,8 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'users',  # custom users app
     'products',
+    'providers',
+    'games',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
