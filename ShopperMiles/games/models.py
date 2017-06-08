@@ -22,15 +22,3 @@ class Task(models.Model):
         verbose_name_plural = "Tareas"
         ordering = ['pk']
 
-class Level(models.Model):
-    # additional fields here
-    number = models.IntegerField(verbose_name="Numero de nivel ")
-    point_xp = models.IntegerField(verbose_name="Experiencia del nivel ")
-    point_sm = models.IntegerField(verbose_name="Puntos SM para este nivel ")
-    def __str__(self):
-        return str(self.number)
-
-    class Meta:
-        verbose_name = "Nivel"
-        verbose_name_plural = "Niveles"
-        ordering = ['number']

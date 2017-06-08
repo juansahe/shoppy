@@ -10,9 +10,11 @@ from datetime import datetime
 @python_2_unicode_compatible
 class User(AbstractUser):
     # additional fields here
-    xperience = models.CharField(max_length=100,null=True)
-    shopper_points = models.CharField(max_length=100,null=True)
+    xperience = models.CharField(max_length=100,null=True ,default="0")
+    shopper_points = models.CharField(max_length=100,null=True,default="0")
     bornday = models.DateField(null=True)
+    level = models.CharField(max_length=100,null=True ,default="1")
+
     def __str__(self):
         return self.username
 
