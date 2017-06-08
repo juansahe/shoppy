@@ -35,3 +35,27 @@ class Promotion(models.Model):
         verbose_name = "Promoción"
         verbose_name_plural = "Promociones"
         ordering = ['name']
+
+
+class Bond(models.Model):
+
+    level = (
+            ('0', 'Activo'),
+            ('1', 'Redimido'),
+            )
+    name = models.CharField( verbose_name="Nombre",max_length=200)
+    description = models.TextField( verbose_name="Descripción")
+    value = models.CharField( verbose_name="Valor",max_length=200)
+    code = models.CharField( verbose_name="Codigo",max_length=200)
+    status = models.CharField( verbose_name="Estado",max_length=200, choices=level,default='0',)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Bono"
+        verbose_name_plural = "Bonos"
+        ordering = ['name']
+
+class Redemption(models.Model):
+    pass

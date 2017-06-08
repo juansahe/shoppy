@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Provider,Promotion
+from .models import Provider,Promotion,Bond
 
 
 
@@ -14,3 +14,4 @@ class ProviderAdmin(admin.ModelAdmin):
 
 admin.site.register(Provider,ProviderAdmin)
 admin.site.register(Promotion)
+admin.site.register(Bond)
