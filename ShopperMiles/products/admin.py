@@ -9,7 +9,7 @@ class ProductAdmin(admin.ModelAdmin):
 
     def image_tag(self, obj):
         return u'<img src="%s" width="50px"/>' % (obj.img.url)
-    image_tag.short_description = 'Image'
+    image_tag.short_description = 'Imagen del producto'
     image_tag.allow_tags = True
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -17,7 +17,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
     def image_tag(self, obj):
         return u'<img src="%s" width="50px"/>' % (obj.img.url)
-    image_tag.short_description = 'Image'
+    image_tag.short_description = 'Imagen'
     image_tag.allow_tags = True
 
 

@@ -21,11 +21,15 @@ TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'shoper_miles',
+            'USER': 'root',
+            'PASSWORD': 'root',
+            'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+            'PORT': '3306',
+            }
+        }
 
 # Mail settings
 # ------------------------------------------------------------------------------
