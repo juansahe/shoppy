@@ -1,3 +1,17 @@
 from django.contrib import admin
 
-# Register your models here.
+
+from .models import  Favorite
+
+
+
+class FavoriteAdmin(admin.ModelAdmin):
+    list_display = ('product','user',)
+
+
+
+
+admin.site.register(Favorite,FavoriteAdmin)
+
+
+

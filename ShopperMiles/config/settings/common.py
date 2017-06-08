@@ -64,6 +64,7 @@ LOCAL_APPS = (
     'providers',
     'games',
     'administrations',
+    'favorites',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
