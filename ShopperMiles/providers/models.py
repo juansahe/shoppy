@@ -15,6 +15,7 @@ class Provider(models.Model):
     email_contact = models.CharField( verbose_name="Email contacto",max_length=200 ,null=True,blank=True)
     img = models.ImageField( verbose_name="Logo",upload_to = 'uploads/marks/')
 
+
     def __str__(self):
         return self.name
 
@@ -27,6 +28,7 @@ class Promotion(models.Model):
 
     name = models.CharField( verbose_name="Nombre",max_length=200)
     description = models.TextField( verbose_name="Descripción",null=True,blank=True)
+    provider = models.ForeignKey(Provider,verbose_name="Marca o Retail", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -48,6 +50,8 @@ class Bond(models.Model):
     value = models.CharField( verbose_name="Valor",max_length=200)
     code = models.CharField( verbose_name="Codigo",max_length=200)
     status = models.CharField( verbose_name="Estado",max_length=200, choices=level,default='0',)
+    provider = models.ForeignKey(Provider,verbose_name="Marca o Retail", on_delete=models.CASCADE)
+
 
     def __str__(self):
         return self.name

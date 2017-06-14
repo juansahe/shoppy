@@ -23,7 +23,7 @@ TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'shoper_miles',
+            'NAME': 'shopper_miles',
             'USER': 'root',
             'PASSWORD': 'root',
             'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
