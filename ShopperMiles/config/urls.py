@@ -7,8 +7,8 @@ from django.views import defaults
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
+from rest_framework.authtoken import views
 from rest_framework.routers import DefaultRouter
-
 from users.views import UserViewSet
 
 router = DefaultRouter()
@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name="about"),
 
     # REST-API
+    url(r'^api/v1/', include('products.urls', namespace='products')),
     url(r'^api/v1/', include('authentication.urls')),
     url(r'^api/v1/', include(router.urls)),
 ]
@@ -38,6 +39,10 @@ if settings.DEBUG:
         url(r'^500/$', defaults.server_error),
     ]
     # static/media files
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)
+    urlpatterns += [
+        url(r'^api/v1/auth', include('rest_framework.urls', namespace='rest_framework'))
+    ]
