@@ -28,6 +28,7 @@ class Promotion(models.Model):
 
     name = models.CharField( verbose_name="Nombre",max_length=200)
     description = models.TextField( verbose_name="Descripción",null=True,blank=True)
+    img = models.ImageField( verbose_name="Imagen",null=True,upload_to = 'uploads/promotion/')
     provider = models.ForeignKey(Provider,verbose_name="Marca o Retail", on_delete=models.CASCADE)
 
     def __str__(self):

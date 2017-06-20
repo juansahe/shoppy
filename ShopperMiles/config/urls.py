@@ -26,6 +26,8 @@ urlpatterns = [
 
     # REST-API
     url(r'^api/v1/', include('products.urls', namespace='products')),
+    url(r'^api/v1/', include('favorites.urls', namespace='favorites')),
+    url(r'^api/v1/', include('providers.urls', namespace='providers')),
     url(r'^api/v1/', include('authentication.urls')),
     url(r'^api/v1/', include(router.urls)),
 ]

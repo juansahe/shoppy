@@ -24,7 +24,7 @@ class UserViewSet(mixins.CreateModelMixin,
     queryset = User.objects.filter(is_active=True)
     serializer_class = UserSerializer
     permission_classes = (IsOwnerOrReadOnly,)
-    filter_fields = ('username', 'email', 'first_name', 'lawebst_name', 'is_staff',
+    filter_fields = ('username', 'email', 'first_name', 'last_name', 'is_staff',
                      'is_superuser', 'is_active',)
 
     # def post(self, request):
