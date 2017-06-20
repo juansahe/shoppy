@@ -11,13 +11,14 @@ from rest_framework.authtoken import views
 from rest_framework.routers import DefaultRouter
 from users.views import UserViewSet
 
+
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
 
 urlpatterns = [
     # Admin
     url(r'^admin/', include(admin.site.urls)),
-    # url(r'^admin_export/', include("vendor.admin_export.urls", namespace="admin_export")),
+    # url(r'^api/auth/login', include('rest_framework.urls',namespace='rest_framework')),
 
     # Main
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name="home"),

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-
+from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -24,8 +24,15 @@ class UserViewSet(mixins.CreateModelMixin,
     queryset = User.objects.filter(is_active=True)
     serializer_class = UserSerializer
     permission_classes = (IsOwnerOrReadOnly,)
-    filter_fields = ('username', 'email', 'first_name', 'last_name', 'is_staff',
+    filter_fields = ('username', 'email', 'first_name', 'lawebst_name', 'is_staff',
                      'is_superuser', 'is_active',)
+
+    # def post(self, request):
+    # user = authenticate(username=username, password=password)
+    # if user is not None:
+    #     if user.is_active:
+    #         login(request , user)
+            # return redirect('')
 
     def list(self, request, *args, **kwargs):
         self.permission_classes = (IsAuthenticated,)
@@ -70,11 +77,10 @@ class UserViewSet(mixins.CreateModelMixin,
         if new_password and password_confirm and new_password == password_confirm:
             user.set_password(new_password)
             user.save()
-            return Response({"message" : "ok"}, status=status.HTTP_204_NO_CONTENT)
+            return Response({"message": "ok"}, status=status.HTTP_204_NO_CONTENT)
         else:
-            return Response({"error" : "the passwords do not match"},
+            return Response({"error": "the passwords do not match"},
                             status=status.HTTP_400_BAD_REQUEST)
-
 
 
 """
@@ -90,4 +96,3 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
 """
-
