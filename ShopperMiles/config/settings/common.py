@@ -192,6 +192,10 @@ AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = reverse_lazy('login')
 LOGIN_URL = '/api-auth/'
 
+AUTHENTICATION_BACKENDS = (
+        'authentication.backends.EmailOrUsernameModelBackend',
+        'django.contrib.auth.backends.ModelBackend'
+        )
 # LOGGING CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#logging
