@@ -6,7 +6,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import Group
-from .models import User
+from .models import User,User_Task
 
 
 class MyUserChangeForm(UserChangeForm):
@@ -38,4 +38,8 @@ class UserAdmin(AuthUserAdmin):
     # form = MyUserChangeForm
     # add_form = MyUserCreationForm
     pass
+
+
 admin.site.unregister(Group)
+admin.site.register(User_Task)
+
