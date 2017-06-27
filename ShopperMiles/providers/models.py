@@ -12,6 +12,9 @@ class Provider(models.Model):
     web_site= models.CharField( verbose_name="Sitio web",max_length=255,null=True,blank=True)
     name = models.CharField( verbose_name="Nombre",max_length=200)
     description = models.TextField( verbose_name="Descripción",null=True)
+    value_bond1 = models.CharField( verbose_name="Valor del bono 1",max_length=200)
+    value_bond2 = models.CharField( verbose_name="Valor del bono 2",max_length=200)
+    value_bond3 = models.CharField( verbose_name="Valor del bono 3",max_length=200)
     phone_contact= models.CharField( verbose_name="Telefono contacto",max_length=50,null=True,blank=True)
     name_contact = models.CharField( verbose_name="Nombre contacto",max_length=200,null=True,blank=True)
     email_contact = models.CharField( verbose_name="Email contacto",max_length=200 ,null=True,blank=True)
@@ -53,6 +56,7 @@ class Bond(models.Model):
     value = models.CharField( verbose_name="Valor",max_length=200)
     code = models.CharField( verbose_name="Codigo",max_length=200)
     status = models.CharField( verbose_name="Estado",max_length=200, choices=level,default='0',)
+    img = models.ImageField( verbose_name="Imagen",null=True,upload_to = 'uploads/bond/')
     provider = models.ForeignKey(Provider,verbose_name="Marca o Retail", on_delete=models.CASCADE)
 
 
