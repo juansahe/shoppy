@@ -7,7 +7,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import viewsets, mixins
 from rest_framework.decorators import detail_route, list_route
-
+from rest_framework import generics
 from .permissions import IsOwnerOrReadOnly, IsAdminOrIsSelf
 from .serializers import CreateUserSerializer, UserSerializer
 from .models import User
@@ -82,6 +82,18 @@ class UserViewSet(mixins.CreateModelMixin,
             return Response({"error": "the passwords do not match"},
                             status=status.HTTP_400_BAD_REQUEST)
 
+# class RedemptionList(generics.ListCreateAPIView):
+#     queryset = Redemption.objects.all()
+#     serializer_class = RedemptionSerializer
+
+#     def get_object(self):
+#         queryset = self.get_queryset()
+#         self.serializer_class = RedemptionSerializer
+#         obj = get_object_or_404(
+#             queryset,
+#             pk=self.kwargs['pk'],
+#         )
+#         return obj
 
 """
 -------------------------------------------------------------------------

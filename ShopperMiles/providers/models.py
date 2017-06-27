@@ -11,8 +11,7 @@ class Provider(models.Model):
     type_provider = models.CharField(verbose_name="Tipo",max_length=200,choices=level,default='0',)
     web_site= models.CharField( verbose_name="Sitio web",max_length=255,null=True,blank=True)
     name = models.CharField( verbose_name="Nombre",max_length=200)
-    description = models.TextField( verbose_name="Descripción",null=True)
-    
+    description = models.TextField( verbose_name="Descripción",null=True)    
     phone_contact= models.CharField( verbose_name="Telefono contacto",max_length=50,null=True,blank=True)
     name_contact = models.CharField( verbose_name="Nombre contacto",max_length=200,null=True,blank=True)
     email_contact = models.CharField( verbose_name="Email contacto",max_length=200 ,null=True,blank=True)
@@ -68,6 +67,4 @@ class Bond(models.Model):
         verbose_name_plural = "Bonos"
         ordering = ['name']
 
-class Redemption(models.Model):
-    pass
 
