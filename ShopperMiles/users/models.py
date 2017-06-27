@@ -28,7 +28,7 @@ class User(AbstractUser):
         )
 
     def __str__(self):
-        return self.username
+        return str(self.pk)
 
 class User_Task(models.Model):
 
@@ -36,7 +36,7 @@ class User_Task(models.Model):
     ('Com', 'Completa'),
     ('Inc', 'Incompleta'),
 )
-    
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -55,6 +55,6 @@ class User_Task(models.Model):
 
     def __str__(self):
         return self.state
-        
+
 
 # for time spamped models
