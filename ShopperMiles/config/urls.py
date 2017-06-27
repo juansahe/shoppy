@@ -25,12 +25,12 @@ urlpatterns = [
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name="about"),
 
     # REST-API
-    url(r'^api', include('products.urls', namespace='products')),
-    url(r'^api', include('favorites.urls', namespace='favorites')),
-    url(r'^api', include('providers.urls', namespace='providers')),
-    url(r'^api', include('games.urls', namespace='games')),
-    url(r'^api', include('authentication.urls')),
-    url(r'^api', include(router.urls)),
+    url(r'^api/', include('products.urls', namespace='products')),
+    url(r'^api/', include('favorites.urls', namespace='favorites')),
+    url(r'^api/', include('providers.urls', namespace='providers')),
+    url(r'^api/', include('games.urls', namespace='games')),
+    url(r'^api/', include('authentication.urls')),
+    url(r'^api/', include(router.urls)),
 ]
 
 if settings.DEBUG:
