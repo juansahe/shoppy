@@ -6,6 +6,9 @@ from providers.views import *
 
 urlpatterns = [
     url(r'^promotion/$', PromotionList.as_view(), name='promotion'),
+    url(r'^provider/$', ProviderList.as_view(), name='provider'),
+    url(r'^bond/$', BondList.as_view(), name='bond'),
+
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
