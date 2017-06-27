@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals, absolute_import
 from django.db import models
 
 class Provider(models.Model):
@@ -9,7 +11,7 @@ class Provider(models.Model):
     type_provider = models.CharField(verbose_name="Tipo",max_length=200,choices=level,default='0',)
     web_site= models.CharField( verbose_name="Sitio web",max_length=255,null=True,blank=True)
     name = models.CharField( verbose_name="Nombre",max_length=200)
-    description = models.TextField( verbose_name="Descripción",null=True)
+    description = models.TextField( verbose_name="Descripción",null=True)    
     phone_contact= models.CharField( verbose_name="Telefono contacto",max_length=50,null=True,blank=True)
     name_contact = models.CharField( verbose_name="Nombre contacto",max_length=200,null=True,blank=True)
     email_contact = models.CharField( verbose_name="Email contacto",max_length=200 ,null=True,blank=True)
@@ -48,9 +50,12 @@ class Bond(models.Model):
             )
     name = models.CharField( verbose_name="Nombre",max_length=200)
     description = models.TextField( verbose_name="Descripción")
-    value = models.CharField( verbose_name="Valor",max_length=200)
+    value1 = models.CharField( verbose_name="Valor 1",max_length=200)
+    value2 = models.CharField( verbose_name="Valor 2",max_length=200)
+    value3 = models.CharField( verbose_name="Valor 3",max_length=200)
     code = models.CharField( verbose_name="Codigo",max_length=200)
     status = models.CharField( verbose_name="Estado",max_length=200, choices=level,default='0',)
+    img = models.ImageField( verbose_name="Imagen",null=True,upload_to = 'uploads/bond/')
     provider = models.ForeignKey(Provider,verbose_name="Marca o Retail", on_delete=models.CASCADE)
 
 

@@ -1,8 +1,13 @@
-from django.shortcuts import render
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals, absolute_import
+from django.shortcuts import render
 from rest_framework import generics
 from .models import Promotion
 from .serializers import PromotionSerializer
+from .models import Provider
+from .serializers import ProviderSerializer
+from .models import Bond
+from .serializers import BondSerializer
 from django.shortcuts import get_object_or_404
 
 class PromotionList(generics.ListCreateAPIView):
@@ -12,6 +17,32 @@ class PromotionList(generics.ListCreateAPIView):
     def get_object(self):
         queryset = self.get_queryset()
         self.serializer_class = PromotionSerializer
+        obj = get_object_or_404(
+            queryset,
+            pk=self.kwargs['pk'],
+        )
+        return obj
+
+class ProviderList(generics.ListCreateAPIView):
+    queryset = Provider.objects.all()
+    serializer_class = ProviderSerializer
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        self.serializer_class = ProviderSerializer
+        obj = get_object_or_404(
+            queryset,
+            pk=self.kwargs['pk'],
+        )
+        return obj
+
+class BondList(generics.ListCreateAPIView):
+    queryset = Bond.objects.all()
+    serializer_class = BondSerializer
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        self.serializer_class = BondSerializer
         obj = get_object_or_404(
             queryset,
             pk=self.kwargs['pk'],
