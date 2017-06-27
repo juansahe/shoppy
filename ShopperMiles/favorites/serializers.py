@@ -1,4 +1,5 @@
-from __future__ import absolute_import, unicode_literals
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals, absolute_import
 from rest_framework import serializers
 from .models import Favorite
 
