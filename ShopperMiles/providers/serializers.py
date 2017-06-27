@@ -14,10 +14,10 @@ class ProviderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Provider
-        fields = ('id','type_provider', 'name', 'description' , 'value_bond1','value_bond2','value_bond3','phone_contact','name_contact','email_contact','img','web_site')
+        fields = ('id','type_provider', 'name', 'description','phone_contact','name_contact','email_contact','img','web_site')
 
 class BondSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Bond
-        fields = ('id', 'name', 'description' ,'value','code','status','provider','img')
+        fields = ('id', 'name', 'description' ,'value1','value2','value3','code','status','provider','img')
