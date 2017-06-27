@@ -26,6 +26,10 @@ obtain_auth_token = ObtainAuthToken.as_view()
 
 
 
+class UserMe(ObtainToken):
+    """ Obtain auth user """
+    pass
+
 # def send_new_password_mail(user, password, forgotten=False):
     # """
     # Send a html message email
