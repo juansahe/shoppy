@@ -21,3 +21,4 @@ class BondSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bond
         fields = ('id', 'name', 'description' ,'value1','value2','value3','code','status','provider','img')
+

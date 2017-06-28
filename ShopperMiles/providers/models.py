@@ -67,6 +67,4 @@ class Bond(models.Model):
         verbose_name_plural = "Bonos"
         ordering = ['name']
 
-class Redemption(models.Model):
-    pass
 

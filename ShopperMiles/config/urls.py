@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name="about"),
 
     # REST-API
+    # url(r'^api/', include('users.urls', namespace='users')),
     url(r'^api/', include('products.urls', namespace='products')),
     url(r'^api/', include('favorites.urls', namespace='favorites')),
     url(r'^api/', include('providers.urls', namespace='providers')),

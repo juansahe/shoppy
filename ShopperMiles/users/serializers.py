@@ -13,6 +13,12 @@ class UserSerializer(serializers.ModelSerializer):
                 'is_active', 'is_staff', 'is_superuser', 'date_joined','xperience','bornday','shopper_points','level',)
         read_only_fields = ('username', 'auth_token', 'date_joined',)
 
+# class RedemptionSerializer(serializers.ModelSerializer):
+
+#     class Meta:
+#         model = Redemption
+#         fields = ('id', 'user', 'bond')
+
 
 class CreateUserSerializer(serializers.ModelSerializer):
     is_active = serializers.BooleanField(default=True)
