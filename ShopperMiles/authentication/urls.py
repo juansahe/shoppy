@@ -9,7 +9,7 @@ urlpatterns = [
     # Token authentication
     url(
         r'^token/',
-        views.obtain_auth_token
+      views.ObtainAuthToken.as_view()
     ),
     # url(
         # r'^exit/',
