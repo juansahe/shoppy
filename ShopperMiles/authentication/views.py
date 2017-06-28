@@ -5,35 +5,30 @@ from __future__ import absolute_import, unicode_literals
 # from django.template import Context
 # from django.template.loader import get_template
 # from django.shortcuts import get_object_or_404
+
 from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.authtoken.views import ObtainAuthToken as ObtainToken
-from rest_framework import parsers, renderers
-from rest_framework.authtoken.models import Token
-from rest_framework.response import Response
-from rest_framework.views import APIView
+
 # from common.tasks import send_email
 from users.models import User
 from .serializers import AuthTokenSerializer
-import json
 
-class ObtainAuthToken(APIView):
-    throttle_classes = ()
-    permission_classes = ()
-    parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.JSONParser,)
-    renderer_classes = (renderers.JSONRenderer,)
+
+class ObtainAuthToken(ObtainToken):
+    """ Obtain auth token """
     serializer_class = AuthTokenSerializer
 
-    def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        # userss =json.dumps(user)
-        token, created = Token.objects.get_or_create(user=user)
-        return Response({'token': token.key, 'id': token.user_id})
+obtain_auth_token = ObtainAuthToken.as_view()
+
+
+
+class UserMe(ObtainToken):
+    """ Obtain auth user """
+    pass
 
 # def send_new_password_mail(user, password, forgotten=False):
     # """
