@@ -17,6 +17,7 @@ router.register(r'users', UserViewSet)
 
 urlpatterns = [
     # Admin
+    url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
     # url(r'^api/auth/login', include('rest_framework.urls',namespace='rest_framework')),
 

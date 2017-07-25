@@ -11,7 +11,7 @@ class Provider(models.Model):
     type_provider = models.CharField(verbose_name="Tipo",max_length=200,choices=level,default='0',)
     web_site= models.CharField( verbose_name="Sitio web",max_length=255,null=True,blank=True)
     name = models.CharField( verbose_name="Nombre",max_length=200)
-    description = models.TextField( verbose_name="Descripción",null=True)
+    description = models.TextField( verbose_name="Descripción",null=True)    
     phone_contact= models.CharField( verbose_name="Telefono contacto",max_length=50,null=True,blank=True)
     name_contact = models.CharField( verbose_name="Nombre contacto",max_length=200,null=True,blank=True)
     email_contact = models.CharField( verbose_name="Email contacto",max_length=200 ,null=True,blank=True)
@@ -29,7 +29,7 @@ class Provider(models.Model):
 class Promotion(models.Model):
 
     name = models.CharField( verbose_name="Nombre",max_length=200)
-    description = models.TextField( verbose_name="Descripcion",null=True,blank=True)
+    description = models.TextField( verbose_name="Descripción",null=True,blank=True)
     img = models.ImageField( verbose_name="Imagen",null=True,upload_to = 'uploads/promotion/')
     provider = models.ForeignKey(Provider,verbose_name="Marca o Retail", on_delete=models.CASCADE)
 
@@ -37,7 +37,7 @@ class Promotion(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = "Promociion"
+        verbose_name = "Promoción"
         verbose_name_plural = "Promociones"
         ordering = ['name']
 
@@ -50,6 +50,7 @@ class Bond(models.Model):
             )
     name = models.CharField( verbose_name="Nombre",max_length=200)
     description = models.TextField( verbose_name="Descripción")
+    shopy_value = models.CharField( verbose_name="Numero de shoppy",max_length=200)
     value1 = models.CharField( verbose_name="Valor 1",max_length=200)
     value2 = models.CharField( verbose_name="Valor 2",max_length=200)
     value3 = models.CharField( verbose_name="Valor 3",max_length=200)
@@ -60,7 +61,7 @@ class Bond(models.Model):
 
 
     def __str__(self):
-        return self.name
+        return str(self.pk)
 
     class Meta:
         verbose_name = "Bono"

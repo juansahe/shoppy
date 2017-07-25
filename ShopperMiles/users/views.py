@@ -8,9 +8,16 @@ from rest_framework.response import Response
 from rest_framework import viewsets, mixins
 from rest_framework.decorators import detail_route, list_route
 from rest_framework import generics
+from rest_framework import parsers, renderers
 from .permissions import IsOwnerOrReadOnly, IsAdminOrIsSelf
 from .serializers import CreateUserSerializer, UserSerializer
-from .models import User
+from providers.models import Bond
+from django.http import JsonResponse
+import json
+from django.core import serializers
+from .serializers import RedemptionSerializer
+from users.models import User,User_Task
+from django.views.generic import View
 
 
 class UserViewSet(mixins.CreateModelMixin,
@@ -32,7 +39,7 @@ class UserViewSet(mixins.CreateModelMixin,
     # if user is not None:
     #     if user.is_active:
     #         login(request , user)
-            # return redirect('')
+    # return redirect('')
 
     def list(self, request, *args, **kwargs):
         self.permission_classes = (IsAuthenticated,)
@@ -68,7 +75,7 @@ class UserViewSet(mixins.CreateModelMixin,
         instance.is_active = False
         instance.save()
 
-    @detail_route(methods=['post'], permission_classes=[IsAdminOrIsSelf,])
+    @detail_route(methods=['post'], permission_classes=[IsAdminOrIsSelf, ])
     def reset_password(self, request, pk=None):
         user = self.get_object()
         new_password = request.data.get('password', None)
@@ -82,7 +89,9 @@ class UserViewSet(mixins.CreateModelMixin,
             return Response({"error": "the passwords do not match"},
                             status=status.HTTP_400_BAD_REQUEST)
 
-# class RedemptionList(generics.ListCreateAPIView):
+
+
+# class Redemption(generics.ListCreateAPIView):
 #     queryset = Redemption.objects.all()
 #     serializer_class = RedemptionSerializer
 
@@ -95,6 +104,54 @@ class UserViewSet(mixins.CreateModelMixin,
 #         )
 #         return obj
 
+
+
+        # ctx["id"] = new_register.id
+
+        # data = json.loads(request.body)
+        # user = User.objects.get(pk=data['id'])
+        # bond = Bond.objects.get(pk=data['id'])
+        # print user
+        # print bond
+        # ctx = {}
+        # ctx['error'] = "no se existe"
+        # return JsonResponse(ctx, safe=False)
+#         tasking = Task.objects.filter(product_id__in=favs, level_id=user.level_id )
+#         serialized_obj = serializers.serialize('json', tasking,)
+#         objectall = json.loads(serialized_obj)
+
+#         # return render(request, 'client_profile.html', ctx)
+#         return JsonResponse(objectall, safe=False)
+
+        # if (data.User.objects.get(email=data['email']))
+        # print
+        # try:
+        #     renden = User.objects.get(
+        #         id=data['id'])
+        #     ctx['error'] = "no se existe"
+        #     return JsonResponse(ctx, safe=False)
+
+        # except ObjectDoesNotExist:
+
+        #     ctx['succes'] = "Guardado con exito"
+        #     # # se crea una nueva direccion
+        #     new_register = Redemption(
+        #         username=data['email'],
+        #         first_name=data['username'],
+        #         email=data['email'],
+        #         bornday=data['bornday'],
+        #         password=make_password(data['password']),
+        #     )
+        #     new_register.save()
+        #     ctx["id"] = new_register.id
+        #     token, created = Token.objects.get_or_create(user=new_register)
+        #     ctx["token"] = token.key
+        #     return JsonResponse(ctx, safe=False)
+
+        # except MultipleObjectsReturned as e:
+        #     ctx['error'] = "no se pudo registrar el usuario ya existe"
+        #     return JsonResponse(ctx, safe=False)
+
 """
 -------------------------------------------------------------------------
     Rather than writing your own viewsets, you'll often want to use
@@ -103,7 +160,7 @@ class UserViewSet(mixins.CreateModelMixin,
 Example:
 
 class UserViewSet(viewsets.ModelViewSet):
-    #A viewset for viewing and editing user instances.
+    # A viewset for viewing and editing user instances.
 
     serializer_class = UserSerializer
     queryset = User.objects.all()

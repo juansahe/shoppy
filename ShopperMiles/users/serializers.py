@@ -2,7 +2,7 @@
 from __future__ import absolute_import, unicode_literals
 
 from rest_framework import serializers
-from .models import User
+from .models import User,Redemption
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -13,11 +13,11 @@ class UserSerializer(serializers.ModelSerializer):
                 'is_active', 'is_staff', 'is_superuser', 'date_joined','xperience','bornday','shopper_points','level',)
         read_only_fields = ('username', 'auth_token', 'date_joined',)
 
-# class RedemptionSerializer(serializers.ModelSerializer):
+class RedemptionSerializer(serializers.ModelSerializer):
 
-#     class Meta:
-#         model = Redemption
-#         fields = ('id', 'user', 'bond')
+    class Meta:
+        model = Redemption
+        fields = ('id', 'user', 'bond','value')
 
 
 class CreateUserSerializer(serializers.ModelSerializer):

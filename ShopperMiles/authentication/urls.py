@@ -9,43 +9,48 @@ urlpatterns = [
     # Token authentication
     url(
         r'^token/',
-      views.ObtainAuthToken.as_view()
+        views.ObtainAuthToken.as_view()
     ),
+    url(
+        r'^register/',
+        views.UserRegister.as_view()
+    ),
+
     # url(
-        # r'^exit/',
-        # views.DestroyTokenView.as_view()
+    # r'^exit/',
+    # views.DestroyTokenView.as_view()
     # ),
     # url(
-        # r'^(?P<pk>[0-9]+)/reset_password/$',
-        # views.reset_password,
-        # name="user-reset-password"
+    # r'^(?P<pk>[0-9]+)/reset_password/$',
+    # views.reset_password,
+    # name="user-reset-password"
+    # ),
+    # url(register
+    # r'^reset_my_password/$',
+    # views.reset_my_password,
+    # name="user-reset-my-password"
     # ),
     # url(
-        # r'^reset_my_password/$',
-        # views.reset_my_password,
-        # name="user-reset-my-password"
+    # r'^forgotten_password/$',
+    # views.forgotten_password,
+    # name="user-forgotten-password"
     # ),
     # url(
-        # r'^forgotten_password/$',
-        # views.forgotten_password,
-        # name="user-forgotten-password"
+    # r'^check_email/$',
+    # views.check_email,
+    # name="user-check-email"
     # ),
     # url(
-        # r'^check_email/$',
-        # views.check_email,
-        # name="user-check-email"
-    # ),
-    # url(
-        # r'^check_username/$',
-        # views.check_username,
-        # name="user-check-username"
+    # r'^check_username/$',
+    # views.check_username,
+    # name="user-check-username"
     # ),
     # # browsable API
     # url(
-        # r'',
-        # include(
-            # 'rest_framework.urls',
-            # namespace='rest_framework'
-        # )
+    # r'',
+    # include(
+    # 'rest_framework.urls',
+    # namespace='rest_framework'
+    # )
     # ),
 ]

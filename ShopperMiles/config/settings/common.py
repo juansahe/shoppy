@@ -40,6 +40,7 @@ DJANGO_APPS = (
     'django.contrib.staticfiles',
     # Useful template tags:
     # 'django.contrib.humanize',
+    'grappelli',
 
     # Admin
     # 'material',
@@ -65,7 +66,7 @@ LOCAL_APPS = (
     'administrations',
     'favorites',
 )
-
+GRAPPELLI_ADMIN_TITLE = 'SHOPPY'
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -286,3 +287,4 @@ VERSATILEIMAGEFIELD_SETTINGS = {
     'create_images_on_demand': False
 }
 
+GRAPPELLI_ADMIN_TITLE = 'Sitio Administrativo Shoppy' 

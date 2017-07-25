@@ -8,7 +8,7 @@ from users.models import User
 
 class Favorite(models.Model):
     # additional fields here
-    product = models.OneToOneField(
+    product = models.ForeignKey(
         Product, verbose_name='Producto', on_delete=models.CASCADE, primary_key=False,)
     user = models.ForeignKey(
         User, verbose_name='Usuario', on_delete=models.CASCADE,)

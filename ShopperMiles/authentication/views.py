@@ -19,11 +19,19 @@ from rest_framework.views import APIView
 from users.models import User
 from .serializers import AuthTokenSerializer
 import json
+from django.views.generic import View
+from django.http import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import MultipleObjectsReturned
+import crypt
+from django.contrib.auth.hashers import make_password
+
 
 class ObtainAuthToken(APIView):
     throttle_classes = ()
     permission_classes = ()
-    parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.JSONParser,)
+    parser_classes = (parsers.FormParser,
+                      parsers.MultiPartParser, parsers.JSONParser,)
     renderer_classes = (renderers.JSONRenderer,)
     serializer_class = AuthTokenSerializer
 
@@ -35,21 +43,62 @@ class ObtainAuthToken(APIView):
         token, created = Token.objects.get_or_create(user=user)
         return Response({'token': token.key, 'id': token.user_id})
 
+
+class UserRegister(View):
+
+    def get(self, request):
+        pass
+
+    def post(self, request):
+        # data = json.loads(request.body)
+        ctx = {}
+        data = json.loads(request.body)
+        print data
+        # if (data.User.objects.get(email=data['email']))
+        # print
+        try:
+            register = User.objects.get(
+                email=data['email'])
+            ctx['error'] = "no se pudo registrar el usuario ya existe"
+            return JsonResponse(ctx, safe=False)
+
+        except ObjectDoesNotExist:
+
+            ctx['succes'] = "Usuario registrado con exito"
+            # # se crea una nueva direccion
+            new_register = User(
+                username=data['email'],
+                first_name=data['username'],
+                email=data['email'],
+                bornday=data['bornday'],
+                password= make_password(data['password']),
+            )
+            new_register.save()
+            ctx["id"] = new_register.id
+            token, created = Token.objects.get_or_create(user=new_register)
+            ctx["token"] = token.key
+            return JsonResponse(ctx, safe=False)
+
+        except MultipleObjectsReturned as e:
+            ctx['error'] = "no se pudo registrar el usuario ya existe"
+            return JsonResponse(ctx, safe=False)
+
+        # return render(request, 'client_profile.html', ctx)
 # def send_new_password_mail(user, password, forgotten=False):
     # """
     # Send a html message email
     # """
     # subject = 'Has olvidado tu contraseña' if forgotten else 'Tu contraseña ha sido modificada'
     # send_email.delay(
-            # subject,
-            # [user.email],                    #recipients
-            # {
-                # 'user': user,
-                # 'raw_password': password,
-                # 'forgotten': forgotten
-                # },
-            # 'emails/new_password.html'
-            # )
+        # subject,
+        # [user.email],                    #recipients
+        # {
+        # 'user': user,
+        # 'raw_password': password,
+        # 'forgotten': forgotten
+        # },
+        # 'emails/new_password.html'
+        # )
 
     # @api_view(['POST'])
 # @permission_classes([IsAuthenticated])
@@ -62,26 +111,26 @@ class ObtainAuthToken(APIView):
     # password_confirm = request.data.get('password_confirm', None)
 
     # if old_password and password and password_confirm and \
-            # password == password_confirm:
+        # password == password_confirm:
 
-                # user = request.user
+        # user = request.user
         # if user.check_password(old_password):
-            # user.set_password(password);
-            # user.save()
-            # return Response(
-                    # {"message" : "ok"},
-                    # status=status.HTTP_204_NO_CONTENT
-                    # )
+        # user.set_password(password);
+        # user.save()
+        # return Response(
+        # {"message" : "ok"},
+        # status=status.HTTP_204_NO_CONTENT
+        # )
         # else:
-            # return Response(
-                    # {"error" : "current password do not match"},
-                    # status=status.HTTP_400_BAD_REQUEST
-                    # )
+        # return Response(
+        # {"error" : "current password do not match"},
+        # status=status.HTTP_400_BAD_REQUEST
+        # )
     # else:
         # return Response(
-                # {"error" : "the passwords do not match"},
-                # status=status.HTTP_400_BAD_REQUEST
-                # )
+        # {"error" : "the passwords do not match"},
+        # status=status.HTTP_400_BAD_REQUEST
+        # )
 
         # @api_view(['POST'])
 # @permission_classes([IsAuthenticated])
@@ -95,29 +144,29 @@ class ObtainAuthToken(APIView):
     # user = User.objects.get(pk=pk)
 
     # if request.user.is_superuser is True or \
-            # (request.user.is_superuser is False and  \
-            # request.user.role in ['ADMIN', 'SUBADMIN'] and \
-            # request.user.company==user.company):
+        # (request.user.is_superuser is False and  \
+        # request.user.role in ['ADMIN', 'SUBADMIN'] and \
+        # request.user.company==user.company):
 
-                # if password and password_confirm and password == password_confirm:
-                    # user.set_password(password)
-            # user.save()
-            # send_new_password_mail(user, password)
+        # if password and password_confirm and password == password_confirm:
+        # user.set_password(password)
+        # user.save()
+        # send_new_password_mail(user, password)
 
-            # return Response(
-                    # {"message" : "ok"},
-                    # status=status.HTTP_204_NO_CONTENT
-                    # )
+        # return Response(
+        # {"message" : "ok"},
+        # status=status.HTTP_204_NO_CONTENT
+        # )
         # else:
-            # return Response(
-                    # {"error" : "the passwords do not match", "lang": "en"},
-                    # status=status.HTTP_400_BAD_REQUEST
-                    # )
+        # return Response(
+        # {"error" : "the passwords do not match", "lang": "en"},
+        # status=status.HTTP_400_BAD_REQUEST
+        # )
     # else:
         # return Response(
-                # {"error" : "Forbbiden"},
-                # status=status.HTTP_403_FORBIDDEN
-                # )
+        # {"error" : "Forbbiden"},
+        # status=status.HTTP_403_FORBIDDEN
+        # )
 
         # @api_view(['POST'])
 # @permission_classes([AllowAny])
@@ -134,7 +183,8 @@ class ObtainAuthToken(APIView):
         # user.set_password(password)
         # user.save()
         # send_new_password_mail(user, password, True)
-        # return Response({"message" : "ok"}, status=status.HTTP_204_NO_CONTENT)
+        # return Response({"message" : "ok"},
+        # status=status.HTTP_204_NO_CONTENT)
 
 
 # @api_view(['POST'])

@@ -9,7 +9,7 @@ from datetime import datetime
 
 from games.models import Level, Task
 
-# from providers.models import Bond
+from providers.models import Bond
 
 # from games.models import Task
 
@@ -18,44 +18,54 @@ from games.models import Level, Task
 
 @python_2_unicode_compatible
 class User(AbstractUser):
+
     # additional fields here
     xperience = models.CharField(max_length=100, null=True, default="0")
     shopper_points = models.CharField(max_length=100, null=True, default="0")
     bornday = models.DateField(null=True)
-    level = models.OneToOneField(
+    level = models.ForeignKey(
         Level,
         on_delete=models.CASCADE,
         primary_key=False,
         null=True,
+        default=1,
     )
 
     def __str__(self):
-        return str(self.pk)
+        return str(self.username)
 
 
-# class Redemption(models.Model):
+class Redemption(models.Model):
 
-#     user = models.ForeignKey(
-#         User,
-#         on_delete=models.CASCADE,
-#         primary_key=False,
-#         verbose_name="Usuario"
-#     )
+    name = models.CharField(max_length=200, null=True)
+    code = models.IntegerField(verbose_name="code")
+    value = models.CharField(max_length=200, null=True)
+    description = models.CharField(max_length=200, null=True)
+    imagen = models.ImageField(verbose_name="Imagen Bonos",
+                               upload_to='uploads/bond/ver_img', blank=True, help_text="Bonos")
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        primary_key=False,
+        verbose_name="Usuario"
+    )
 
-#     bond = models.ForeignKey(
-#         Bond,
-#         on_delete=models.CASCADE,
-#         primary_key=False,
-#         verbose_name="Bonos"
-#     )
+    bond = models.ForeignKey(
+        Bond,
+        on_delete=models.CASCADE,
+        primary_key=False,
+        verbose_name="Bonos",
+        related_name='bonos',
+    )
 
-#     def __str__(self):
-#         return self.user
+    def __str__(self):
+        return self.pk
 
-#     class Meta:
-#         verbose_name = "Redencion"
-#         verbose_name_plural = "Redenciones"
-#         ordering = ['user']
+    class Meta:
+        verbose_name = "Redencion"
+        verbose_name_plural = "Redenciones"
+        ordering = ['pk']
+
 
 
 class User_Task(models.Model):
@@ -83,7 +93,11 @@ class User_Task(models.Model):
         max_length=100, verbose_name="Estado de la tarea", choices=state, default='Com',)
 
     def __str__(self):
-        return self.state
+        return '%s-%s-%s' % (self.state,self.user,self.tarea)
 
+    class Meta:
+        verbose_name = "Tareas realizadas por los usuarios"
+        verbose_name_plural = "Tareas realizadas por los usuarios"
+        ordering = ['pk']
 
 # for time spamped models
